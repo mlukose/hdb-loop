@@ -11,3 +11,4 @@ class World:
 
     def __init__(self, tilemap):
         self.tilemap = tilemap
+        self.world.map = []

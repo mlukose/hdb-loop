@@ -20,5 +20,7 @@ class App:
         pyxel.cls(0)
 
         self.ball.render()
+        pyxel.line(10,10, 50,50, col=10)
+
         
 App()

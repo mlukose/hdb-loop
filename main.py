@@ -20,9 +20,10 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
-
+        
+        pyxel.bltm(0,0,0,0,0,160,120)
         self.ball.render()
-        pyxel.line(10,10, 50,50, col=10)
+        
 
         
 App()

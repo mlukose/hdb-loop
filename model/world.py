@@ -1,8 +1,9 @@
 class WorldItem:
     #Where in the resource file each is
-    GRASS = (3,1)
-    FLOOR = (5,1)
-    PLAYER = (1,1)
+    GRASS = (0,0)
+    DIRT = (1,0)
+    SAND = (2,0)
+    BLANK = (3,0)
 
 class World:
     #In Tiles where each tile is 16x16
@@ -11,4 +12,3 @@ class World:
 
     def __init__(self, tilemap):
         self.tilemap = tilemap
-        self.world.map = []

@@ -13,12 +13,3 @@ class World:
     def __init__(self, tilemap):
         self.tilemap = tilemap
 
-
-# def sprite_collision(x,y,x2,y2):
-#     tile_size = 8
-#     if x + tile_size <= x2 or x2 + tile_size <= x:
-#         return False
-#     if y + tile_size <= y2 or y2 + tile_size <= y:
-#         return False
-    
-#     return True

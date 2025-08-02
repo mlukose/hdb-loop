@@ -1,8 +1,9 @@
 import pyxel
 import model.common as common
 
-MAX_VELOCITY = 6
-FRICTION = 0.95
+MAX_VELOCITY = 10
+POWER = 0.2
+FRICTION = 0.98
 
 class Ball:
     def __init__(self):
@@ -30,8 +31,8 @@ class Ball:
             self.vel_x = self.drag_end_x - self.drag_start_x
             self.vel_y = self.drag_end_y - self.drag_start_y
             (self.vel_x, self.vel_y) = common.limit_vector_length(self.vel_x, self.vel_y, MAX_VELOCITY)
-            self.vel_x = -self.vel_x
-            self.vel_y = -self.vel_y
+            self.vel_x = -self.vel_x * POWER
+            self.vel_y = -self.vel_y * POWER
         
         future_x = self.x + self.vel_x
         future_y = self.y + self.vel_y

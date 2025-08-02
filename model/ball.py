@@ -7,6 +7,9 @@ FRICTION = 0.98
 
 class Ball:
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.x = common.WIDTH / 2
         self.y = common.HEIGHT / 2
         self.vel_x = 0

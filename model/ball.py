@@ -54,18 +54,24 @@ class Ball:
 
         #Tilemap collision detection
         solid_tiles = [(1,0), (2,0)] # Index in the tilemap
+        kill_tiles = [(4,0)]
         # X Collision
         tile_x = round(future_x) // 8
         tile_y = round(self.y) // 8
         tile_idx = pyxel.tilemap(0).pget(tile_x, tile_y)
         if tile_idx in solid_tiles:
             self.vel_x = -self.vel_x
+        elif tile_idx in kill_tiles:
+            self.reset()
 
+        # Y Collision
         tile_x = round(self.x) // 8
         tile_y = round(future_y) // 8
         tile_idx = pyxel.tilemap(0).pget(tile_x, tile_y)
         if tile_idx in solid_tiles:
             self.vel_y = -self.vel_y
+        elif tile_idx in kill_tiles:
+            self.reset()
 
         self.x += self.vel_x
         self.y += self.vel_y

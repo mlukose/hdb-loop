@@ -5,18 +5,22 @@ MAX_VELOCITY = 10
 POWER = 0.2
 FRICTION = 0.98
 
+WIN_ZONE_X = round(common.WIDTH / 2)
+WIN_ZONE_Y = 96
+
 class Ball:
     def __init__(self):
         self.reset()
 
     def reset(self):
-        self.x = common.WIDTH / 2
-        self.y = common.HEIGHT / 2
+        self.x = WIN_ZONE_X
+        self.y = WIN_ZONE_Y
         self.vel_x = 0
         self.vel_y = 0
         self.drag_start_x = 0
         self.drag_start_y = 0
         self.is_dragging = False
+        self.taken_shot = False
 
     def update(self):
          # Detect mouse button press (start of drag)
@@ -76,15 +80,31 @@ class Ball:
         self.x += self.vel_x
         self.y += self.vel_y
 
-        if pyxel.btnp(pyxel.KEY_BACKSPACE):
-            self.x += 1
+        if self.in_win_zone():
+            if self.taken_shot:
+                self.reset()
+        elif not self.taken_shot:
+            self.taken_shot = True
 
         self.vel_x *= FRICTION
         self.vel_y *= FRICTION
 
     def render(self):
+        for yi in range(3):
+            for xi in range(3):
+                pyxel.pset(WIN_ZONE_X - 1 + xi, WIN_ZONE_Y - 1 + yi, pyxel.COLOR_GRAY)
+
+        pyxel.pset(WIN_ZONE_X, WIN_ZONE_Y, pyxel.COLOR_BLACK)
+
         pyxel.pset(self.x, self.y, pyxel.COLOR_WHITE)
 
         if self.is_dragging:
             pyxel.line(self.x, self.y, self.x + (-self.drag_start_x + pyxel.mouse_x), self.y + (-self.drag_start_y
                                                                                        + pyxel.mouse_y), pyxel.COLOR_RED)
+
+    def in_win_zone(self):
+        x = round(self.x)
+        y = round(self.y)
+
+        return abs(x - WIN_ZONE_X) <= 1 and abs(y - WIN_ZONE_Y) <= 1
+

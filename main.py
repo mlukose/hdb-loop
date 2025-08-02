@@ -13,7 +13,7 @@ class State(Enum):
 
 class App:
     def __init__(self):
-        pyxel.init(WIDTH, HEIGHT, title=TITLE, fps=60)
+        pyxel.init(WIDTH, HEIGHT, title=TITLE, fps=120)
         pyxel.load("sprites.pyxres")
         pyxel.mouse(True)
 
@@ -48,6 +48,8 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
+        
+        pyxel.bltm(0,0,0,0,0,160,120)
 
         match self.state:
             case State.MENU:

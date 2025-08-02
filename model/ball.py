@@ -65,6 +65,7 @@ class Ball:
         tile_idx = pyxel.tilemap(0).pget(tile_x, tile_y)
         if tile_idx in solid_tiles:
             self.vel_x = -self.vel_x
+            pyxel.play(3, 63)
         elif tile_idx in kill_tiles:
             self.reset()
 
@@ -74,6 +75,7 @@ class Ball:
         tile_idx = pyxel.tilemap(0).pget(tile_x, tile_y)
         if tile_idx in solid_tiles:
             self.vel_y = -self.vel_y
+            pyxel.play(3, 63)
         elif tile_idx in kill_tiles:
             self.reset()
 

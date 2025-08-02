@@ -1,7 +1,7 @@
 import pyxel
 
-WIDTH = 160
-HEIGHT = 120
+WIDTH = 128
+HEIGHT = 128
 TITLE = "Loop Golf"
 SUBTITLE = "Press space to play"
 

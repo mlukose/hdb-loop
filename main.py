@@ -28,6 +28,8 @@ class App:
             self.state = State.PLAYING
 
     def game_render(self):
+        pyxel.bltm(0,0,0,0,0,128,128)
+
         self.ball.render()
 
     def menu_render(self):
@@ -49,8 +51,6 @@ class App:
     def draw(self):
         pyxel.cls(0)
         
-        pyxel.bltm(0,0,0,0,0,160,120)
-
         match self.state:
             case State.MENU:
                 self.menu_render()

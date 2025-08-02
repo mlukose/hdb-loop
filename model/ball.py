@@ -2,6 +2,7 @@ import pyxel
 import model.common as common
 
 MAX_VELOCITY = 6
+FRICTION = 0.95
 
 class Ball:
     def __init__(self):
@@ -60,8 +61,8 @@ class Ball:
         self.x += self.vel_x
         self.y += self.vel_y
 
-        self.vel_x *= 0.9
-        self.vel_y *= 0.9
+        self.vel_x *= FRICTION
+        self.vel_y *= FRICTION
 
     def render(self):
         pyxel.pset(self.x, self.y, pyxel.COLOR_WHITE)

@@ -2,6 +2,8 @@ import pyxel
 
 WIDTH = 160
 HEIGHT = 120
+TITLE = "Loop Golf"
+SUBTITLE = "Press space to play"
 
 def limit_vector_length(x, y, limit) -> tuple[int, int]:
     length = x * x + y * y

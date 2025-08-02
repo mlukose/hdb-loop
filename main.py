@@ -4,7 +4,7 @@ import pyxel
 
 from model.world import World
 from model.ball import Ball
-from model.common import WIDTH, HEIGHT
+from model.common import WIDTH, HEIGHT, TITLE, SUBTITLE
 
 class State(Enum):
     MENU = 1
@@ -13,7 +13,7 @@ class State(Enum):
 
 class App:
     def __init__(self):
-        pyxel.init(WIDTH, HEIGHT, title= "Loop Ball", fps=120)
+        pyxel.init(WIDTH, HEIGHT, title=TITLE, fps=120)
         pyxel.load("sprites.pyxres")
         pyxel.mouse(True)
 
@@ -29,6 +29,13 @@ class App:
 
     def game_render(self):
         self.ball.render()
+
+    def menu_render(self):
+        text_width = pyxel.FONT_WIDTH * len(TITLE)
+        pyxel.text(WIDTH / 2 - text_width / 2, HEIGHT / 2 - pyxel.FONT_HEIGHT, TITLE, pyxel.COLOR_WHITE)
+
+        text_width = pyxel.FONT_WIDTH * len(SUBTITLE)
+        pyxel.text(WIDTH / 2 - text_width / 2, HEIGHT / 2, SUBTITLE, pyxel.COLOR_RED)
 
     def update(self):
         match self.state:
@@ -46,7 +53,7 @@ class App:
 
         match self.state:
             case State.MENU:
-                pass
+                self.menu_render()
             case State.PLAYING:
                 self.game_render()
             case State.GAME_OVER:

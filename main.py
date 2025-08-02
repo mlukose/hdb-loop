@@ -13,7 +13,7 @@ class State(Enum):
 
 class App:
     def __init__(self):
-        pyxel.init(WIDTH, HEIGHT, title= "Loop Ball", fps=60)
+        pyxel.init(WIDTH, HEIGHT, title= "Loop Ball", fps=120)
         pyxel.load("sprites.pyxres")
         pyxel.mouse(True)
 

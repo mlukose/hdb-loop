@@ -16,6 +16,7 @@ class App:
         pyxel.init(WIDTH, HEIGHT, title=TITLE, fps=120)
         pyxel.load("sprites.pyxres")
         pyxel.mouse(True)
+        pyxel.playm(0, loop=True)
 
         self.world = World(pyxel.tilemap(0))
         self.ball = Ball()

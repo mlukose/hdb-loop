@@ -46,23 +46,29 @@ class Ball:
         if future_y >= common.HEIGHT:
             self.y = 0
 
+        future_x = self.x + self.vel_x
+        future_y = self.y + self.vel_y
+
         #Tilemap collision detection
         solid_tiles = [(1,0), (2,0)] # Index in the tilemap
         # X Collision
-        tile_x = future_x // 8
-        tile_y = self.y // 8
+        tile_x = round(future_x) // 8
+        tile_y = round(self.y) // 8
         tile_idx = pyxel.tilemap(0).pget(tile_x, tile_y)
         if tile_idx in solid_tiles:
             self.vel_x = -self.vel_x
 
-        tile_x = self.x // 8
-        tile_y = future_y // 8
+        tile_x = round(self.x) // 8
+        tile_y = round(future_y) // 8
         tile_idx = pyxel.tilemap(0).pget(tile_x, tile_y)
         if tile_idx in solid_tiles:
             self.vel_y = -self.vel_y
 
         self.x += self.vel_x
         self.y += self.vel_y
+
+        if pyxel.btnp(pyxel.KEY_BACKSPACE):
+            self.x += 1
 
         self.vel_x *= FRICTION
         self.vel_y *= FRICTION

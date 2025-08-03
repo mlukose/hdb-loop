@@ -69,10 +69,10 @@ class Ball:
         tile_idx = world.tilemap.pget(tile_x, tile_y)
         if tile_idx in solid_tiles:
             self.vel_x = -self.vel_x
-            pyxel.play(3, 63)
+            pyxel.play(1, 42)
         elif tile_idx in kill_tiles:
             self.reset()
-            pyxel.play(3, 0)
+            pyxel.play(1, 40)
             self.score += 1
 
         # Y Collision
@@ -81,10 +81,10 @@ class Ball:
         tile_idx = world.tilemap.pget(tile_x, tile_y)
         if tile_idx in solid_tiles:
             self.vel_y = -self.vel_y
-            pyxel.play(3, 63)
+            pyxel.play(1, 42)
         elif tile_idx in kill_tiles:
             self.reset()
-            pyxel.play(3, 0)
+            pyxel.play(1, 40)
             self.score += 1
 
         self.x += self.vel_x
@@ -95,7 +95,7 @@ class Ball:
                 self.reset()
                 self.score += 1
                 self.should_advance_level = True
-                pyxel.play(0, 1)
+                pyxel.play(1, 41)
         elif not self.taken_shot:
             self.taken_shot = True
 

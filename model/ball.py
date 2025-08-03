@@ -1,5 +1,7 @@
 import pyxel
+from model import world
 import model.common as common
+from model.world import World
 
 MAX_VELOCITY = 10
 POWER = 0.2
@@ -21,8 +23,9 @@ class Ball:
         self.drag_start_y = 0
         self.is_dragging = False
         self.taken_shot = False
+        self.should_advance_level = False
 
-    def update(self):
+    def update(self, world: World):
          # Detect mouse button press (start of drag)
         if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):
             self.drag_start_x = pyxel.mouse_x
@@ -62,7 +65,7 @@ class Ball:
         # X Collision
         tile_x = round(future_x) // 8
         tile_y = round(self.y) // 8
-        tile_idx = pyxel.tilemap(0).pget(tile_x, tile_y)
+        tile_idx = world.tilemap.pget(tile_x, tile_y)
         if tile_idx in solid_tiles:
             self.vel_x = -self.vel_x
             pyxel.play(3, 63)
@@ -72,7 +75,7 @@ class Ball:
         # Y Collision
         tile_x = round(self.x) // 8
         tile_y = round(future_y) // 8
-        tile_idx = pyxel.tilemap(0).pget(tile_x, tile_y)
+        tile_idx = world.tilemap.pget(tile_x, tile_y)
         if tile_idx in solid_tiles:
             self.vel_y = -self.vel_y
             pyxel.play(3, 63)
@@ -85,6 +88,7 @@ class Ball:
         if self.in_win_zone():
             if self.taken_shot:
                 self.reset()
+                self.should_advance_level = True
         elif not self.taken_shot:
             self.taken_shot = True
 

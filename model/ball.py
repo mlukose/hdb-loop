@@ -27,13 +27,13 @@ class Ball:
 
     def update(self, world: World):
          # Detect mouse button press (start of drag)
-        if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):
+        if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) and not self.taken_shot:
             self.drag_start_x = pyxel.mouse_x
             self.drag_start_y = pyxel.mouse_y
             self.is_dragging = True
 
         # Detect mouse button release (end of drag)
-        if pyxel.btnr(pyxel.MOUSE_BUTTON_LEFT):
+        if pyxel.btnr(pyxel.MOUSE_BUTTON_LEFT) and not self.taken_shot:
             self.drag_end_x = pyxel.mouse_x
             self.drag_end_y = pyxel.mouse_y
             self.is_dragging = False
@@ -125,4 +125,7 @@ class Ball:
         y = round(self.y)
 
         return abs(x - WIN_ZONE_X) <= 1 and abs(y - WIN_ZONE_Y) <= 1
+
+    def get_speed_squared(self):
+        return self.vel_x ** 2 + self.vel_y ** 2
 

@@ -27,12 +27,14 @@ class App:
         self.level = 0
         self.world = World(pyxel.tilemaps[self.level])
         self.ball = Ball()
+        self.score = 0
 
     def game_update(self):
-        self.ball.update(self.world)
+        if self.ball.get_speed_squared() <= 0.000001 and self.ball.taken_shot:
+            self.ball.reset()
+            self.score += 1
 
-        if pyxel.btnp(pyxel.KEY_SPACE):
-            self.state = State.PLAYING
+        self.ball.update(self.world)
 
         if self.ball.should_advance_level:
             self.ball.should_advance_level = False
@@ -46,6 +48,8 @@ class App:
         pyxel.bltm(0,0,self.level,0,0,128,128)
 
         self.ball.render()
+
+        pyxel.text(0, 0, "Score: " + str(self.score), pyxel.COLOR_GRAY)
 
     def menu_update(self):
         if pyxel.btnp(pyxel.KEY_SPACE):

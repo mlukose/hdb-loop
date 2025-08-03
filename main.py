@@ -4,7 +4,7 @@ import pyxel
 
 from model.world import World
 from model.ball import Ball
-from model.common import WIDTH, HEIGHT, TITLE, SUBTITLE, NUM_LEVELS
+from model.common import WIDTH, HEIGHT, TITLE, SUBTITLE, NUM_LEVELS, GAME_OVER_TITLE
 
 class State(Enum):
     MENU = 1
@@ -49,7 +49,7 @@ class App:
 
         self.ball.render()
 
-        pyxel.text(0, 0, "Score: " + str(self.score), pyxel.COLOR_GRAY)
+        pyxel.text(0, 0, "Score: " + str(self.score), pyxel.COLOR_WHITE)
 
     def menu_update(self):
         if pyxel.btnp(pyxel.KEY_SPACE):
@@ -70,7 +70,13 @@ class App:
 
 
     def game_over_render(self):
-        pyxel.text(WIDTH / 2, HEIGHT / 2, "GAME OVER", pyxel.COLOR_DARK_BLUE)
+        title = GAME_OVER_TITLE + str(self.score)
+        text_width = pyxel.FONT_WIDTH * len(title)
+        pyxel.text(WIDTH / 2 - text_width / 2, HEIGHT / 2 - pyxel.FONT_HEIGHT, title, pyxel.COLOR_WHITE)
+
+        text_width = pyxel.FONT_WIDTH * len(SUBTITLE)
+        pyxel.text(WIDTH / 2 - text_width / 2, HEIGHT / 2, SUBTITLE, pyxel.COLOR_RED)
+
 
     def update(self):
         match self.state:

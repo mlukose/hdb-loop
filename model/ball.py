@@ -13,6 +13,7 @@ WIN_ZONE_Y = 96
 class Ball:
     def __init__(self):
         self.reset()
+        self.score = 0
 
     def reset(self):
         self.x = WIN_ZONE_X
@@ -72,6 +73,7 @@ class Ball:
         elif tile_idx in kill_tiles:
             self.reset()
             pyxel.play(3, 0)
+            self.score += 1
 
         # Y Collision
         tile_x = round(self.x) // 8
@@ -82,6 +84,8 @@ class Ball:
             pyxel.play(3, 63)
         elif tile_idx in kill_tiles:
             self.reset()
+            pyxel.play(3, 0)
+            self.score += 1
 
         self.x += self.vel_x
         self.y += self.vel_y
@@ -89,6 +93,7 @@ class Ball:
         if self.in_win_zone():
             if self.taken_shot:
                 self.reset()
+                self.score += 1
                 self.should_advance_level = True
                 pyxel.play(0, 1)
         elif not self.taken_shot:

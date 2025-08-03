@@ -27,12 +27,11 @@ class App:
         self.level = 0
         self.world = World(pyxel.tilemaps[self.level])
         self.ball = Ball()
-        self.score = 0
 
     def game_update(self):
         if self.ball.get_speed_squared() <= 0.00001 and self.ball.taken_shot:
             self.ball.reset()
-            self.score += 1
+            self.ball.score += 1
             pyxel.play(3, 0)
 
         self.ball.update(self.world)
@@ -50,7 +49,7 @@ class App:
 
         self.ball.render()
 
-        pyxel.text(0, 0, "Score: " + str(self.score), pyxel.COLOR_WHITE)
+        pyxel.text(0, 0, "Score: " + str(self.ball.score), pyxel.COLOR_WHITE)
 
     def menu_update(self):
         if pyxel.btnp(pyxel.KEY_SPACE):
@@ -71,7 +70,7 @@ class App:
 
 
     def game_over_render(self):
-        title = GAME_OVER_TITLE + str(self.score)
+        title = GAME_OVER_TITLE + str(self.ball.score)
         text_width = pyxel.FONT_WIDTH * len(title)
         pyxel.text(WIDTH / 2 - text_width / 2, HEIGHT / 2 - pyxel.FONT_HEIGHT, title, pyxel.COLOR_WHITE)
 

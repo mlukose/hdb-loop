@@ -71,6 +71,7 @@ class Ball:
             pyxel.play(3, 63)
         elif tile_idx in kill_tiles:
             self.reset()
+            pyxel.play(3, 0)
 
         # Y Collision
         tile_x = round(self.x) // 8
@@ -89,6 +90,7 @@ class Ball:
             if self.taken_shot:
                 self.reset()
                 self.should_advance_level = True
+                pyxel.play(0, 1)
         elif not self.taken_shot:
             self.taken_shot = True
 

@@ -30,9 +30,10 @@ class App:
         self.score = 0
 
     def game_update(self):
-        if self.ball.get_speed_squared() <= 0.000001 and self.ball.taken_shot:
+        if self.ball.get_speed_squared() <= 0.00001 and self.ball.taken_shot:
             self.ball.reset()
             self.score += 1
+            pyxel.play(3, 0)
 
         self.ball.update(self.world)
 

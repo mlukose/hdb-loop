@@ -5,7 +5,7 @@ from model.world import World
 
 MAX_VELOCITY = 10
 POWER = 0.2
-FRICTION = 0.98
+FRICTION = 0.99
 
 WIN_ZONE_X = round(common.WIDTH / 2)
 WIN_ZONE_Y = 96
@@ -96,9 +96,9 @@ class Ball:
         self.vel_y *= FRICTION
 
     def render(self):
-        for yi in range(3):
-            for xi in range(3):
-                pyxel.pset(WIN_ZONE_X - 1 + xi, WIN_ZONE_Y - 1 + yi, pyxel.COLOR_GRAY)
+        for yi in range(5):
+            for xi in range(5):
+                pyxel.pset(WIN_ZONE_X - 2 + xi, WIN_ZONE_Y - 2 + yi, pyxel.COLOR_GRAY)
 
         pyxel.pset(WIN_ZONE_X, WIN_ZONE_Y, pyxel.COLOR_BLACK)
 
@@ -124,7 +124,7 @@ class Ball:
         x = round(self.x)
         y = round(self.y)
 
-        return abs(x - WIN_ZONE_X) <= 1 and abs(y - WIN_ZONE_Y) <= 1
+        return abs(x - WIN_ZONE_X) <= 2 and abs(y - WIN_ZONE_Y) <= 2
 
     def get_speed_squared(self):
         return self.vel_x ** 2 + self.vel_y ** 2

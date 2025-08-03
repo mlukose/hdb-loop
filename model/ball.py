@@ -105,9 +105,21 @@ class Ball:
         pyxel.pset(self.x, self.y, pyxel.COLOR_WHITE)
 
         if self.is_dragging:
-            pyxel.line(self.x, self.y, self.x + (-self.drag_start_x + pyxel.mouse_x), self.y + (-self.drag_start_y
-                                                                                       + pyxel.mouse_y), pyxel.COLOR_RED)
+            dx = -self.drag_start_x + pyxel.mouse_x
+            dy = -self.drag_start_y + pyxel.mouse_y
 
+            length = (dx ** 2 + dy ** 2) ** 0.5
+            max_length = 40
+
+            if length > max_length:
+                scale = max_length / length
+                dx *= scale
+                dy *= scale
+
+            pyxel.line(
+                self.x, self.y, self.x + dx, self.y + dy, pyxel.COLOR_RED
+            )
+            
     def in_win_zone(self):
         x = round(self.x)
         y = round(self.y)
